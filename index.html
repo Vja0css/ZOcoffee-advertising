@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Случайный выбор div</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .box {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            color: white;
+            transition: background-color 0.5s;
+            position: absolute;
+        }
+        .selected {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" style="background-color: red;">1</div>
+    <div class="box" style="background-color: blue;">2</div>
+    <div class="box" style="background-color: green;">3</div>
+    <div class="box" style="background-color: purple;">4</div>
+    <div class="box" style="background-color: orange;">5</div>
+    <script>
+        function selectRandomDiv() {
+            // Снимаем выделение со всех div
+            const boxes = document.querySelectorAll('.box');
+            boxes.forEach(box => {
+                box.classList.remove('selected');
+                box.style.display = 'none'; // Скрываем все div
+            });
+
+            // Генерируем случайный индекс
+            const randomIndex = Math.floor(Math.random() * boxes.length);
+
+            // Показываем случайный div и добавляем класс для выделения
+            boxes[randomIndex].classList.add('selected');
+            boxes[randomIndex].style.display = 'flex'; // Показываем выбранный div
+        }
+
+        // Вызываем функцию при загрузке страницы
+        document.addEventListener('DOMContentLoaded', selectRandomDiv);
+
+        // Добавляем обработчик события на кнопку
+        document.getElementById('randomButton').addEventListener('click', selectRandomDiv);
+    </script>
+</body>
+</html>
